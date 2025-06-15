@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,7 +15,19 @@ public class Spawner : MonoBehaviour
   {
     currentHealth = maxHealth;
     spawnTimer = spawnInterval; // Initialize the spawn timer
+    StartCoroutine(SpawnLoop());
+  }
 
+  IEnumerator SpawnLoop()
+  {
+    yield return new WaitForSeconds(Random.Range(0.5f, 3f));
+
+    while (true)
+    {
+      SpawnEnemy();
+      float delay = Random.Range(0.5f, 3f);
+      yield return new WaitForSeconds(delay);
+    }
   }
 
   private void Update()

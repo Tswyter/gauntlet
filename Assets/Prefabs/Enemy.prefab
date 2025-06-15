@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 712228784812200050}
   - component: {fileID: 4393508029627698662}
   - component: {fileID: -6460091551770286886}
+  - component: {fileID: 5125583311529695114}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac0e14b66c064548b88dd9e3cd05d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 2
   moveSpeed: 3
 --- !u!54 &-6460091551770286886
 Rigidbody:
@@ -256,3 +257,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &5125583311529695114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543533175154239159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774cded70092eb348865d353ea8b0550, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinPrefab: {fileID: 568145039341845993, guid: 8e7cd4542934ff145a48808f4d97228c, type: 3}
+  coinSpawnPoint: {fileID: 2940413011292140073}
+  popUpForce: 4
+  randomSpread: 1

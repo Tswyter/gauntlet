@@ -7,6 +7,12 @@ public class Enemy : MonoBehaviour
 
     public float moveSpeed = 3f;
     private Transform player;
+    private CoinDropper coinDropper;
+
+    private void Awake()
+    {
+        coinDropper = GetComponent<CoinDropper>();
+    }
 
     private void Start()
     {
@@ -40,7 +46,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        // Handle death logic, e.g., play animation, drop loot, etc.
+        coinDropper?.DropCoin(); // Drop coins if CoinDropper is attached
         Destroy(gameObject); // For simplicity, just destroy the enemy
     }
 
