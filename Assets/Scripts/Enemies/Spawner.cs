@@ -1,0 +1,40 @@
+using UnityEngine;
+
+public class Spawner : MonoBehaviour {
+  public int maxHealth = 100;
+  private int currentHealth;
+
+  public GameObject enemyPrefab; // Prefab to spawn
+  public float spawnInterval = 5f; // Time between spawns
+  private float spawnTimer;
+
+  private void Start() {
+    currentHealth = maxHealth;
+    spawnTimer = spawnInterval; // Initialize the spawn timer
+  }
+
+  private void Update() {
+    // Update the spawn timer and spawn enemies if it's time
+    spawnTimer -= Time.deltaTime;
+    if (spawnTimer <= 0f) {
+      SpawnEnemy();
+      spawnTimer = spawnInterval; // Reset the timer
+    }
+  }
+
+  private void SpawnEnemy() {
+    Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
+    Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+  }
+
+  public void TakeDamage(int damage) {
+    currentHealth -= damage;
+    if (currentHealth <= 0) {
+      Die();
+    }
+  }
+  private void Die() {
+    // Handle death logic, e.g., play animation, drop loot, etc.
+    Destroy(gameObject); // For simplicity, just destroy the spawner
+  }
+}
