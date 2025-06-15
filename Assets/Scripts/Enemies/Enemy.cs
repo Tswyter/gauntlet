@@ -5,24 +5,27 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 10;
     private int currentHealth;
 
-    p[ublic float moveSpeed = 3f;
-    pirvate Transform player;]
+    public float moveSpeed = 3f;
+    private Transform player;
 
     private void Start()
     {
-      GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
             player = playerObj.transform;
+            transform.LookAt(player);
         }
         currentHealth = maxHealth;
     }
 
-    void Update() {
-      if (player == null) return;
+    void Update()
+    {
+        if (player == null) return;
 
-      Vector3 direction = (player.position - Transform.position).normalized;
-      transform.position += direction * moveSpeed * Time.deltaTime;
+        Vector3 direction = (player.position - transform.position).normalized;
+        transform.position += direction * moveSpeed * Time.deltaTime;
+        transform.LookAt(player);
     }
 
     public void TakeDamage(int damage)
@@ -43,9 +46,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       if (other.compareTag("Player")) {
-        Debug.Log("Enemy collided with player!");
-        Destroy(gameObject); // Destroy enemy on collision with player
-       }
+        Debug.Log("OnTriggerEnter fired");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Enemy collided with player!");
+            TakeDamage(10);
+        }
     }
 }
