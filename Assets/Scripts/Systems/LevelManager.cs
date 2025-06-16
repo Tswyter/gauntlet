@@ -78,13 +78,14 @@ public class LevelManager : MonoBehaviour
 
     Transform spawnPoint = GameObject.FindWithTag("PlayerSpawn")?.transform;
 
-    Debug.Log("Spawn Point: " + (spawnPoint != null ? spawnPoint.name : "null"));
+    Debug.Log("Spawn Point:");
 
     if (spawnPoint != null)
     {
-      Debug.Log("Spawn point found.");
+      Debug.Log("Spawn point found." + spawnPoint.position);
 
       GameObject player = GameObject.FindWithTag("Player");
+      CharacterController characterController = player?.GetComponent<CharacterController>();
 
       if (player == null)
       {
@@ -92,13 +93,9 @@ public class LevelManager : MonoBehaviour
         // Instantiate the player if they don't exist in the scene
         player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
         player.tag = "Player";
+        characterController = player.GetComponent<CharacterController>();
       }
-      else
-      {
-        Debug.Log("Player found. Moving to spawn point...");
-        // Move the existing player to the spawn point
-        player.transform.position = spawnPoint.position;
-      }
+      characterController.Move(spawnPoint.position - player.transform.position);
     }
     else
     {

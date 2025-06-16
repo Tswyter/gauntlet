@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
     private int currentHealth;
 
     public float moveSpeed = 3f;
+    private Rigidbody rb;
     private Transform player;
     private CoinDropper coinDropper;
 
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody>();
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -25,13 +27,14 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (player == null) return;
 
         Vector3 direction = (player.position - transform.position).normalized;
-        transform.position += direction * moveSpeed * Time.deltaTime;
-        transform.LookAt(player);
+        direction.y = 0f;
+        Vector3 move = direction * moveSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + move);
     }
 
     public void TakeDamage(int damage)
@@ -54,6 +57,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             TakeDamage(10);
+            other.GetComponent<Player>()?.TakeDamage(1); // Assuming Player has a TakeDamage method
         }
     }
 }

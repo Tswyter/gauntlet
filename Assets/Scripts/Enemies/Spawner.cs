@@ -48,7 +48,7 @@ public class Spawner : MonoBehaviour
 
   private void SpawnEnemy()
   {
-    Vector3 spawnPos = transform.position;
+    Vector3 spawnPos = transform.position + Vector3.up * 0.5f;
     Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
   }
 
