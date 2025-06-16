@@ -5,6 +5,10 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour
 {
   public static LevelManager Instance;
+
+  [Header("Player Settings")]
+  public GameObject playerPrefab; // Assign the player prefab in the Unity Editor
+
   private List<Spawner> activeSpawners = new List<Spawner>();
 
   private void Awake()
@@ -18,9 +22,25 @@ public class LevelManager : MonoBehaviour
     DontDestroyOnLoad(gameObject);
   }
 
+  private void Start()
+  {
+    Debug.Log("LevelManager Start called.");
+    Scene currentScene = SceneManager.GetActiveScene();
+    OnSceneLoaded(currentScene, LoadSceneMode.Single);
+  }
+
+  private void OnEnable()
+  {
+    SceneManager.sceneLoaded += OnSceneLoaded;
+  }
+
+  private void OnDisable()
+  {
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+  }
+
   public void RegisterSpawner(Spawner spawner)
   {
-    Debug.Log("Registering spawner: " + spawner.name);
     if (!activeSpawners.Contains(spawner))
     {
       activeSpawners.Add(spawner);
@@ -43,12 +63,46 @@ public class LevelManager : MonoBehaviour
   private void OnAllSpawnersDestroyed()
   {
     GameManager.Instance.LevelComplete();
-    StartCoroutine(GoToShopAfterDelay()); // Start coroutine to go to shop after a delay
+    StartCoroutine(GoToShopAfterDelay());
   }
 
   private System.Collections.IEnumerator GoToShopAfterDelay()
   {
-    yield return new WaitForSeconds(2f); // Wait for 2 seconds before going to the shop
-    SceneManager.LoadScene("ShopWorld"); // Load the shop scene
+    yield return new WaitForSeconds(2f);
+    SceneManager.LoadScene("ShopWorld");
+  }
+
+  private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+  {
+    Debug.Log($"Scene Loaded: {scene.name}");
+
+    Transform spawnPoint = GameObject.FindWithTag("PlayerSpawn")?.transform;
+
+    Debug.Log("Spawn Point: " + (spawnPoint != null ? spawnPoint.name : "null"));
+
+    if (spawnPoint != null)
+    {
+      Debug.Log("Spawn point found.");
+
+      GameObject player = GameObject.FindWithTag("Player");
+
+      if (player == null)
+      {
+        Debug.Log("Player not found. Instantiating player...");
+        // Instantiate the player if they don't exist in the scene
+        player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+        player.tag = "Player";
+      }
+      else
+      {
+        Debug.Log("Player found. Moving to spawn point...");
+        // Move the existing player to the spawn point
+        player.transform.position = spawnPoint.position;
+      }
+    }
+    else
+    {
+      Debug.LogWarning("PlayerSpawn not found in the scene!");
+    }
   }
 }

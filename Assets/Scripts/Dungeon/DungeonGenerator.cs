@@ -11,6 +11,8 @@ public class DungeonGenerator : MonoBehaviour
   public int width = 15;
   public int height = 15;
 
+  public int maxSpanwers = 2;
+
   private List<Vector3> CreateFloorTiles()
   {
     List<Vector3> availablePositions = new List<Vector3>();
@@ -29,7 +31,7 @@ public class DungeonGenerator : MonoBehaviour
 
   private void CreateEnemySpawners(List<Vector3> availablePositions)
   {
-    int spawnerCount = Random.Range(1, 6);
+    int spawnerCount = Random.Range(1, maxSpanwers);
 
     for (int i = 0; i < spawnerCount; i++)
     {

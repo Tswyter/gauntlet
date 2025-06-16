@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &430538377
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8342673
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.5513603
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 66.921
+      objectReference: {fileID: 0}
+    - target: {fileID: 957199371707116529, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8686475958428046876, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
+      propertyPath: m_Name
+      value: PlayerSpawn
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8009761eac3fe904e85296da608c6b58, type: 3}
 --- !u!1 &602048163
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,11 +209,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d93051c049b6549ad0fb2f299fae14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 1518835275478095449, guid: 4b9620634b1bdec46a57cf9ba5d4fc99, type: 3}
   floorTilePrefab: {fileID: 3357927796749525739, guid: 44183eff036b9314b95f436fcb0c9363, type: 3}
   enemySpawnerPrefab: {fileID: 9015595294971834363, guid: f8698b03b90e8794da176c2f6918475e, type: 3}
   width: 15
   height: 15
+  maxSpanwers: 2
 --- !u!4 &602048165
 Transform:
   m_ObjectHideFlags: 0
@@ -365,3 +422,4 @@ SceneRoots:
   - {fileID: 1531004916}
   - {fileID: 824846845}
   - {fileID: 602048165}
+  - {fileID: 430538377}
