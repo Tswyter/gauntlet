@@ -11,8 +11,7 @@ public class CoinPickup : MonoBehaviour
       GameManager gameManager = FindObjectOfType<GameManager>();
       if (gameManager != null)
       {
-        gameManager.AddCoins(coinValue); // Add coins to the player's total
-        Debug.Log("Coin picked up! Value: " + coinValue);
+        gameManager.AddCoins(coinValue);
       }
 
       Destroy(gameObject); // Destroy the coin pickup after collection

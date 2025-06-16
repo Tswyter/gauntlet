@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,11 +7,12 @@ public class GameManager : MonoBehaviour
     public DungeonGenerator dungeonGenerator;
 
     private int playerCoins = 0;
+    [SerializeField] private TextMeshProUGUI coinText;
 
     public void AddCoins(int amount)
     {
         playerCoins += amount;
-        Debug.Log("Coins added: " + amount + ". Total coins: " + playerCoins);
+        UpdateCoinUI();
     }
 
     private void Awake()
@@ -27,5 +29,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         dungeonGenerator.GenerateDungeon();
+    }
+
+    private void UpdateCoinUI()
+    {
+        if (coinText != null)
+        {
+            coinText.text = "Coins: " + playerCoins.ToString();
+        }
     }
 }

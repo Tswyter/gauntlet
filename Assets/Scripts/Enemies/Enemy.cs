@@ -37,7 +37,6 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("Enemy took damage: " + damage + " Current Health: " + currentHealth);
         if (currentHealth <= 0)
         {
             Die();
@@ -52,10 +51,8 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OnTriggerEnter fired");
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Enemy collided with player!");
             TakeDamage(10);
         }
     }

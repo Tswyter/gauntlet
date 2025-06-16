@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -28,30 +29,75 @@ public class PlayerMovement : MonoBehaviour
 
     FaceMouse();
 
-    if (Input.GetMouseButtonDown(0)) {
+    if (Input.GetMouseButtonDown(0))
+    {
       ShootProjectile();
+    }
+
+    if (Input.GetKeyDown(KeyCode.T))
+    {
+      SuckUpCollectibles();
     }
   }
 
-  private void ShootProjectile() {
+  private void ShootProjectile()
+  {
     Vector3 spawnPos = projectileSpawnPoint != null ? projectileSpawnPoint.position : transform.position + transform.forward * 0.5f;
     GameObject proj = Instantiate(projectilePrefab, spawnPos, Quaternion.identity);
-    
+
     Projectile projectile = proj.GetComponent<Projectile>();
     if (projectile != null)
     {
-        projectile.Initialize(transform.forward * projectileSpeed);
+      projectile.Initialize(transform.forward * projectileSpeed);
     }
   }
 
-  private void FaceMouse() {
+  private void FaceMouse()
+  {
     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-    if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f)) {
+    if (Physics.Raycast(ray, out RaycastHit hitInfo, 100f))
+    {
       Vector3 lookPos = hitInfo.point - transform.position;
       lookPos.y = 0f; // Keep the y-axis level
-      if (lookPos. sqrMagnitude > 0.01f) { // Avoid zero vector
+      if (lookPos.sqrMagnitude > 0.01f)
+      { // Avoid zero vector
         Quaternion targetRotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+      }
+    }
+  }
+
+  private void SuckUpCollectibles()
+  {
+    GameObject[] coins = GameObject.FindGameObjectsWithTag("Coin");
+    foreach (GameObject coin in coins)
+    {
+      StartCoroutine(MoveCoinToPlayer(coin));
+    }
+  }
+
+  private IEnumerator MoveCoinToPlayer(GameObject coin)
+  {
+    float speed = 5f; // Adjust the speed as needed
+    while (coin != null && Vector3.Distance(coin.transform.position, transform.position) > 0.1f)
+    {
+      // Move the coin toward the player's position
+      coin.transform.position = Vector3.MoveTowards(
+          coin.transform.position,
+          transform.position,
+          speed * Time.deltaTime
+      );
+
+      yield return null; // Wait for the next frame
+    }
+
+    // Once the coin reaches the player, destroy it or trigger collection logic
+    if (coin != null)
+    {
+      GameManager gameManager = FindObjectOfType<GameManager>();
+      if (gameManager != null)
+      {
+        gameManager.AddCoins(1); // Assuming 1 coin value per pickup
       }
     }
   }
