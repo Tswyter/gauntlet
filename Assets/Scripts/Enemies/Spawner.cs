@@ -1,6 +1,5 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
@@ -11,8 +10,14 @@ public class Spawner : MonoBehaviour
   public float spawnInterval = 5f; // Time between spawns
   private float spawnTimer;
 
-  private void Start()
+  private IEnumerator Start()
   {
+    while (LevelManager.Instance == null)
+    {
+      // Wait for LevelManager to be initialized
+      yield return null;
+    }
+    LevelManager.Instance.RegisterSpawner(this);
     currentHealth = maxHealth;
     spawnTimer = spawnInterval; // Initialize the spawn timer
     StartCoroutine(SpawnLoop());
@@ -58,6 +63,7 @@ public class Spawner : MonoBehaviour
   private void Die()
   {
     // Handle death logic, e.g., play animation, drop loot, etc.
+    LevelManager.Instance.UnregisterSpawner(this);
     Destroy(gameObject); // For simplicity, just destroy the spawner
   }
 }

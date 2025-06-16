@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Bootstrap.unity
+    guid: 00533dd59b73381498dfb0f0d5a32ec3
+  - enabled: 1
+    path: Assets/Scenes/GameManager.unity
+    guid: 0c12c7700e6077f4b8f8d3d7f548e76a
+  - enabled: 1
+    path: Assets/Scenes/ShopWorld.unity
+    guid: 1d57b97fdcf5ae94c8532a193ee71c17
+  - enabled: 1
+    path: Assets/Scenes/DungeonWorld.unity
+    guid: 40af1f1aa591d794097eb33f1e6fca4d
   m_configObjects: {}
