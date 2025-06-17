@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     private int playerCoins = 0;
-    private int difficultyLevel = 1;
+    public int difficultyLevel = 1;
 
     [SerializeField] private TextMeshProUGUI coinText;
 

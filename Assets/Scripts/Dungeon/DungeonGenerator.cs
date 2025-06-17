@@ -11,7 +11,8 @@ public class DungeonGenerator : MonoBehaviour
   public int width = 15;
   public int height = 15;
 
-  public int maxSpanwers = 2;
+  public int maxSpanwers => GameManager.Instance.difficultyLevel * 2;
+  public int minSpanwers => GameManager.Instance.difficultyLevel;
 
   private List<Vector3> CreateFloorTiles()
   {
